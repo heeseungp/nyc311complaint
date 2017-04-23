@@ -1,2 +1,4 @@
 venv/
 Data/
+311_dashboard/*
+!311_dashboard/src
