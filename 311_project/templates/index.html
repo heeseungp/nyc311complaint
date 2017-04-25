@@ -7,7 +7,12 @@
  <div id="graph">
  </div>
  	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
- 	<script src="{{ url_for('static', filename='JS/script.js') }}" ></script>
+ 	<script type="text/javascript">
+ 		d3.csv('./static/data/cube_NoiseResidential.csv', function(error,data) {
+ 		console.log(error);
+        console.log(data);
+    });
+ 	</script>
 </body>
 </html>
 
