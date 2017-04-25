@@ -1,6 +1,5 @@
 ## 311 Data Visualization Project ##
 ---
-
 To run the server on local instance, run
 
 ```
