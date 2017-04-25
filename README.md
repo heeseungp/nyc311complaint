@@ -1,16 +1,6 @@
 ## 311 Data Visualization Project ##
 ---
 
-**Ayaz Shah**
-
-**Si Mai**
-
-**Joseph Park**
-
-**Sharfaraz Hassan**
-
----
-
 To run the server on local instance, run
 
 ```
