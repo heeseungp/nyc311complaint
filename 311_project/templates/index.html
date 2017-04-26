@@ -1,10 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>311 Data Visualization</title>
 </head>
 <body>
-<h1> Hello</h1>
+ <div id="graph">
+ </div>
+ 	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+ 	<script type="text/javascript">
+ 		d3.csv('./static/data/cube_NoiseResidential.csv', function(error,data) {
+ 		console.log(error);
+        console.log(data);
+    });
+ 	</script>
 </body>
 </html>
 
