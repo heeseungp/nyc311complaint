@@ -8,12 +8,6 @@ data_path = './static/data/'
 #df = pd.read_csv(data_path + '311Data1.csv')
 #print(df)
 
-winners = [
-    {'name': 'Albert Einstein', 'category':'Physics'},
-    {'name': 'V.S. Naipaul', 'category':'Literature'},
-    {'name': 'Dorothy Hodgkin', 'category':'Chemistry'}
-]
-
 @app.route("/data")
 def get_data():
     df = pd.read_csv(data_path + '311Data2.csv')
