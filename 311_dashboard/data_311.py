@@ -10,7 +10,7 @@ data_path = './static/data/'
 
 @app.route("/data")
 def get_data():
-    df = pd.read_csv(data_path + '311Data2.csv')
+    df = pd.read_csv(data_path + '311DataMini.csv')
     return df.to_json(orient='records')
 
 @app.route('/')
