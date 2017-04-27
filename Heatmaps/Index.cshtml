@@ -1,0 +1,300 @@
+﻿@{
+	ViewBag.Title = "311 Data";
+}
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<head>
+	<style>
+		rect.bordered {
+			stroke: #E6E6E6;
+			stroke-width: 3px;
+		}
+
+		text.axis-workweek {
+			fill: #000;
+		}
+
+		text.axis-worktime {
+			fill: #000;
+		}
+
+		.header-text{
+			margin-left: 300px;  
+			font-weight: bolder; 
+			font-size: x-large; 
+		}
+	</style>
+</head>
+<body>
+	<p class="header-text">2011 - 2014 Street Conditions Complaints</p>
+	<div id="chart"></div>
+	<div id="dataset-picker">
+	</div>
+
+
+	<script type="text/javascript">
+
+		$('document').ready(function () {
+		//	var list = [];
+
+		//$('button').click(function () {
+		//	d3.csv("/Content/data311.csv", function (data) {
+		//		dataset = data;
+		//		modify_data();
+		//	});
+
+		//	function modify_data() {
+		//		dataset = dataset.filter(function (el) {
+		//			return el.ComplaintType == "Noise - Street/Sidewalk"
+		//		});
+		//		console.log(dataset.length);
+		//		for (i = 0; i < dataset.length; i++) {
+		//			var hour = moment(dataset[i].Date).format('HH');
+		//			dataset[i].UK = hour;
+		//			dataset[i].UK = parseInt(dataset[i].UK);
+		//			dataset[i].UK += 1; 
+		//			dataset[i].Date = moment(dataset[i].Date).day();
+		//			dataset[i].Date += 1;
+		//			for (k = 0; k < list.length; k++) {
+		//				if (dataset[i].Date == list[k].day && dataset[i].UK == list[k].hour) {
+		//					found = 1;
+		//					list[k].value++;
+		//					break;
+		//				}
+		//				else { found = 0; }
+		//			}
+
+		//			if (found == 0) {
+		//				var new_item = {};
+		//				new_item.day = dataset[i].Date;
+		//				new_item.hour = parseInt(dataset[i].UK);
+		//				new_item.value = 1;
+		//				list.push(new_item);
+		//			}
+		//			found = 0;
+		//		}
+		//		for (j = 0; j < list.length; j++) {
+		//			list[j].value = (list[j].value / 5) * 10;
+		//		}
+		//	}
+		//	JSONToCSVConvertor(list, "Data 311", true);
+		//});
+
+		//function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel) {
+		//	var arrData = typeof JSONData != 'object' ? JSON.parse(JSONData) : JSONData;
+
+		//	var CSV = '';
+
+		//	CSV += ReportTitle + '\r\n\n';
+		//	if (ShowLabel) {
+		//		var row = "";
+
+		//		for (var index in arrData[0]) {
+
+		//			row += index + ',';
+		//		}
+
+		//		row = row.slice(0, -1);
+
+		//		CSV += row + '\r\n';
+		//	}
+
+		//	for (var i = 0; i < arrData.length; i++) {
+		//		var row = "";
+
+		//		for (var index in arrData[i]) {
+		//			row += '"' + arrData[i][index] + '",';
+		//		}
+
+		//		row.slice(0, row.length - 1);
+
+		//		CSV += row + '\r\n';
+		//	}
+
+		//	if (CSV == '') {
+		//		alert("Invalid data");
+		//		return;
+		//	}
+
+		//	var fileName = "MyReport_";
+		//	fileName += ReportTitle.replace(/ /g, "_");
+
+		//	var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
+
+		//	var link = document.createElement("a");
+		//	link.href = uri;
+
+		//	link.style = "visibility:hidden";
+		//	link.download = fileName + ".csv";
+
+		//	document.body.appendChild(link);
+		//	link.click();
+		//	document.body.removeChild(link);
+		//}
+
+		//	var len;
+		//	var dataset = [];
+		//	var item = {};
+		//	item.day = 1;
+		//	item.hour = 1;
+		//	item.value = 0;
+		//	list.push(item);
+		//	var found = 0;
+
+
+
+			var margin = { top: 50, right: 0, bottom: 100, left: 30 },
+			 width = 960 - margin.left - margin.right,
+			 height = 430 - margin.top - margin.bottom,
+			 gridSize = Math.floor(width / 24),
+			 legendElementWidth = gridSize * 2,d
+			 buckets = 9,
+			 colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494", "#081d58"],
+			 days = ["M", "T", "W", "Th", "F", "S", "Su"],
+			 times = ["1am", "2am", "3am", "4am", "5am", "6am", "7am", "8am", "9am", "10am", "11am", "12am", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12pm"];
+			 datasets = ["/Content/street_conditions.csv", "/Content/general_construction.csv", "/Content/water_system.csv", "/Content/street_noise_complaints.csv", "/Content/illegal_parking.csv"];
+
+			var svg = d3.select("#chart").append("svg")
+				.attr("width", width + margin.left + margin.right)
+				.attr("height", height + margin.top + margin.bottom)
+				.append("g")
+				.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+			var dayLabels = svg.selectAll(".dayLabel")
+				.data(days)
+				.enter().append("text")
+				  .text(function (d) { return d; })
+				  .attr("x", 0)
+				  .attr("y", function (d, i) { return i * gridSize; })
+				  .style("text-anchor", "end")
+				  .attr("transform", "translate(-6," + gridSize / 1.5 + ")")
+				  .attr("class", function (d, i) { return ((i >= 0 && i <= 4) ? "dayLabel mono axis axis-workweek" : "dayLabel mono axis"); });
+
+			var timeLabels = svg.selectAll(".timeLabel")
+				.data(times)
+				.enter().append("text")
+				  .text(function (d) { return d; })
+				  .attr("x", function (d, i) { return i * gridSize; })
+				  .attr("y", 0)
+				  .style("text-anchor", "middle")
+				  .attr("transform", "translate(" + gridSize / 2 + ", -6)")
+				  .attr("class", function (d, i) { return ((i >= 7 && i <= 16) ? "timeLabel mono axis axis-worktime" : "timeLabel mono axis"); });
+
+			var heatmapChart = function (csvFile) {
+				d3.csv(csvFile,
+				function (d) {
+					return {
+						day: +d.day,
+						hour: +d.hour,
+						value: +d.value
+					};
+				},
+				function (error, data) {
+					var colorScale = d3.scale.quantile()
+						.domain([0, buckets - 1, d3.max(data, function (d) { return d.value; })])
+						.range(colors);6
+
+					var cards = svg.selectAll(".hour")
+						.data(data, function (d) { return d.day + ':' + d.hour; });
+
+					cards.enter().append("rect")
+						.attr("x", function (d) { return (d.hour - 1) * gridSize; })
+						.attr("y", function (d) { return (d.day - 1) * gridSize; })
+						.attr("rx", 4)
+						.attr("ry", 4)
+						.attr("class", "hour bordered")
+						.attr("width", gridSize)
+						.attr("height", gridSize)
+						.style("fill", colors[0]);
+
+
+					cards.append("title");
+
+					cards.transition().duration(1000)
+						.style("fill", function (d) { return colorScale(d.value); });
+
+					cards.select("title").text(function (d) { return d.value; });
+
+					cards.exit().remove();
+
+					var legend = svg.selectAll(".legend")
+						.data([0].concat(colorScale.quantiles()), function (d) { return d; });
+
+					legend.enter().append("g")
+						.attr("class", "legend");
+
+					legend.append("rect")
+					  .attr("x", function (d, i) { return legendElementWidth * i; })
+					  .attr("y", height)
+					  .attr("width", legendElementWidth)
+					  .attr("height", gridSize / 2)
+					  .style("fill", function (d, i) { return colors[i]; });
+
+					legend.append("text")
+					  .attr("class", "mono")
+					  .text(function (d) { return "≥ " + Math.round(d); })
+					  .attr("x", function (d, i) { return legendElementWidth * i; })
+					  .attr("y", height + gridSize);
+
+					legend.exit().remove();
+
+				});
+			};
+
+			heatmapChart(datasets[0]);
+
+			var datasetpicker = d3.select("#dataset-picker").selectAll(".dataset-button")
+			  .data(datasets);
+
+			datasetpicker.enter()
+			  .append("input")
+			  .attr("value", function (d) {
+			  	if (d == "/Content/illegal_parking.csv") {
+			  		return 'Illegal Parking Complaints';
+			  	}
+			  	else if (d == "/Content/general_construction.csv") {
+			  		return 'General Construction Complaints';
+			  	}
+			  	else if (d == "/Content/water_system.csv") {
+			  		return 'Water System Complaints';
+			  	}
+			  	else if (d == "/Content/street_noise_complaints.csv") {
+			  		return 'Street Noise Complaints';
+			  	}
+			  	else if (d == "/Content/street_conditions.csv") {
+			  		return 'Street Conditions Complaints';
+			  	}
+			  	heat
+
+
+
+			  })
+			  .attr("type", "button")
+			  .attr("class", "dataset-button")
+			  .on("click", function (d) {
+			  	console.log(d);
+			  	if (d == "/Content/illegal_parking.csv") {
+			  		$('.header-text').text('2011 - 2014 '+'Illegal Parking Complaints');
+			  	}
+			  	else if (d == "/Content/general_construction.csv") {
+			  		$('.header-text').text('2011 - 2014 ' + 'General Construction Complaints');
+			  	}
+			  	else if (d == "/Content/water_system.csv") {
+			  		$('.header-text').text('2011 - 2014 ' + 'Water System Complaints');
+			  	}
+			  	else if (d == "/Content/street_noise_complaints.csv") {
+			  		$('.header-text').text('2011 - 2014 ' + 'Street Noise Complaints');
+			  	}
+			  	else if (d == "/Content/street_conditions.csv") {
+			  		$('.header-text').text('2011 - 2014 ' + 'Street Conditions Complaints');
+			  	}
+			  	heatmapChart(d);
+			  });
+
+	});
+	</script>
+	@*<button class='gen_btn'>Generate File</button>*@
+	</body>
+
