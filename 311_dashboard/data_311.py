@@ -1,6 +1,16 @@
 import pandas as pd
 import json
+#from pymongo import MongoClient
 from flask import Flask, render_template
+
+'''
+client = MongoClient()
+client = MongoClient('localhost', 27017)
+db = client['visualization311']
+
+collection = db['complaints']
+'''
+
 app = Flask(__name__)
 
 data_path = './static/data/'
