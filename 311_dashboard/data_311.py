@@ -1,15 +1,12 @@
 import pandas as pd
 import json
-#from pymongo import MongoClient
+import pprint
+from pymongo import MongoClient
 from flask import Flask, render_template
 
-'''
-client = MongoClient()
 client = MongoClient('localhost', 27017)
 db = client['visualization311']
-
-collection = db['complaints']
-'''
+#collection = db['complaints']
 
 app = Flask(__name__)
 
@@ -25,7 +22,8 @@ def get_data():
 
 @app.route('/')
 def hello():
-    return render_template('index.html')
+    querydata = db.complaints.find_one()
+    return render_template('index.html', test= querydata['Agency'])
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)

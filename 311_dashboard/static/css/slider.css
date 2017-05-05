@@ -1,0 +1,11 @@
+#slider .slider-selection {
+	background: yellow;
+}
+
+#slider .slider-track-high {
+	background: green;
+}
+
+#slider .slider-track-low {
+	background: red;
+}
