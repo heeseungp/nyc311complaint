@@ -12,15 +12,7 @@
   
   <style>
     #slider .slider-selection {
-      background: yellow;
-      }
-
-      #slider .slider-track-high {
-        background: green;
-      }
-
-      #slider .slider-track-low {
-        background: red;
+      background: green;
       }
   </style>
 
@@ -58,42 +50,60 @@
           <div class="chart-wrapper">
             <div class="chart-stage">
 
-              <div class="btn-group-vertical" data-toggle="buttons">
+              <!--Button does not disable for some reason when you've selected more than 2 -->
+
+              <!--<div class="btn-group-vertical" data-toggle="buttons">
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option1" autocomplete="off" checked> Blocked Driveway
+                  <input class="single-checkbox" type="checkbox" name="options" id="option1" autocomplete="off"> Blocked Driveway
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option2" autocomplete="off"> General Construction
+                  <input class="single-checkbox" type="checkbox" name="options" id="option2" autocomplete="off"> General Construction
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option3" autocomplete="off"> Heating
+                  <input class="single-checkbox" type="checkbox" name="options" id="option3" autocomplete="off"> Heating
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option4" autocomplete="off" checked> Illegal Parking
+                  <input class="single-checkbox" type="checkbox" name="options" id="option4" autocomplete="off"> Illegal Parking
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option5" autocomplete="off"> Plumbing
+                  <input class="single-checkbox" type="checkbox" name="options" id="option5" autocomplete="off"> Plumbing
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option6" autocomplete="off"> Residential Noise
+                  <input class="single-checkbox" type="checkbox" name="options" id="option6" autocomplete="off"> Residential Noise
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option7" autocomplete="off" checked> Street Light Condition
+                  <input class="single-checkbox" type="checkbox" name="options" id="option7" autocomplete="off"> Street Light Condition
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option8" autocomplete="off"> Street Condition
+                  <input class="single-checkbox" type="checkbox" name="options" id="option8" autocomplete="off"> Street Condition
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option9" autocomplete="off"> Water System
+                  <input class="single-checkbox" type="checkbox" name="options" id="option9" autocomplete="off"> Water System
                 </label>
                 <label class="btn btn-primary btn-lg btn-block">
-                  <input type="checkbox" name="options" id="option10" autocomplete="off"> Water (Heat/Hot)
+                  <input class="single-checkbox" type="checkbox" name="options" id="option10" autocomplete="off"> Water (Heat/Hot)
                 </label>
+              </div>-->
+
+
+<!---->
+              <div class="pricing-levels-3">
+                  <input class="single-checkbox" type="checkbox" name="options" id="option1"> Blocked Driveway <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option2"> General Construction <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option3"> Heating <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option4"> Illegal Parking <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option5"> Plumbing <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option6"> Residential Noise <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option7"> Street Light Condition <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option8"> Street Condition <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option9"> Water System <br>
+                  <input class="single-checkbox" type="checkbox" name="options" id="option10"> Water (Heat/Hot) <br>
+              </div>              
+
+              
+              <div>
+                <input id="time" type="text" style="width: auto;"/>
               </div>
-              
-              
-              <input id="time" type="text"/>
-              
 
             </div>
           </div>
@@ -159,16 +169,31 @@
   <script src='./static/js/graphs.js' type='text/javascript'></script>
 
   <script src="./static/js/bootstrap-slider.js"></script>
-  
+
   <script type="text/javascript">
       $(document).ready(function() {
+
+        // for slider
         $("#time").slider({
             id: "slider",
             min: 0,
-            max: 10,
+            max: 83,
             range: true,
-            value: [3,7]
+            value: [20,60],
+            orientation: 'vertical',
+
         });
+
+        // for complaint checkbox
+        var limit = 2;
+        $('input.single-checkbox').on('change', function(evt) {
+          if($(this).siblings(':checked').length >= limit) {
+              this.checked = false;
+          }
+        });
+
+        
+
     });
   </script>
 
