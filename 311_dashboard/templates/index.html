@@ -84,27 +84,34 @@
                   <input class="single-checkbox" type="checkbox" name="options" id="option10" autocomplete="off"> Water (Heat/Hot)
                 </label>
               </div>-->
+              <div class="wrapper">
+                <div class="col-sm-12 wrapper">
+                  
+                  <div class="col-sm-10 checkbox">
+                      <input class="single-checkbox" type="checkbox" name="options" id="option1"> Blocked Driveway <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option2"> General Construction <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option3"> Heating <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option4"> Illegal Parking <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option5"> Plumbing <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option6"> Residential Noise <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option7"> Street Light Condition <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option8"> Street Condition <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option9"> Water System <br>
+                      <input class="single-checkbox" type="checkbox" name="options" id="option10"> Water (Heat/Hot) <br>
+                  </div>              
 
+                  <div class="col-sm-2 wrapper">
+                    <input id="time" type="text" style="width: auto;"/>
+                  </div>
 
-<!---->
-              <div class="pricing-levels-3">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option1"> Blocked Driveway <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option2"> General Construction <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option3"> Heating <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option4"> Illegal Parking <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option5"> Plumbing <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option6"> Residential Noise <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option7"> Street Light Condition <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option8"> Street Condition <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option9"> Water System <br>
-                  <input class="single-checkbox" type="checkbox" name="options" id="option10"> Water (Heat/Hot) <br>
-              </div>              
-
-              
-              <div>
-                <input id="time" type="text" style="width: auto;"/>
+                  <div class="wrapper">
+                    <span>From: <span id="timeValue1">September 2011</span></span> <br>
+                    <span>To: <span id="timeValue2">July 2012</span></span>
+                  </div>
+                </div>
               </div>
 
+        
             </div>
           </div>
         </div> 
@@ -179,12 +186,14 @@
             min: 0,
             max: 83,
             range: true,
-            value: [20,60],
+            value: [20,30],
             orientation: 'vertical',
+            // remove tooltip to display the index of months and years
+            tooltip: "always" 
 
         });
 
-        // for complaint checkbox
+        // for complaint checkbox 
         var limit = 2;
         $('input.single-checkbox').on('change', function(evt) {
           if($(this).siblings(':checked').length >= limit) {
@@ -192,6 +201,16 @@
           }
         });
 
+        var monthNames = ["January", "Februrary", "March", "April", "May", "June", "July", "August", "September",
+        "October", "November", "December"];
+        
+        $("#time").on("slide", function(slideEvt) {
+          $("#timeValue1").text(monthNames[slideEvt.value[0] % 12] + " 201" + Math.floor(slideEvt.value[0]/12));
+        });
+
+        $("#time").on("slide", function(slideEvt) {
+          $("#timeValue2").text(monthNames[slideEvt.value[1] % 12] + " 201" + Math.floor(slideEvt.value[1]/12));
+        });
         
 
     });
