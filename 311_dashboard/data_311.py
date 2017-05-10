@@ -24,7 +24,6 @@ def get_data():
 def hello():
     return render_template('index.html')
 
-# testing
 @app.route('/query', methods=['GET', 'POST'])
 def query():    
     complaintType = request.form.getlist('options')
@@ -39,6 +38,26 @@ def query():
     querydata = db.complaints.find({"CreatedDate": {"$gte":fromTime, "$lt":toTime} , "$or" : mongoListparam })
  
     return render_template('index.html', query = querydata)
+
+#Prototype before merging 
+#make sure you edit index.html for url_for to /data
+'''
+# What it should look like when merging
+@app.route('/data', methods=['POST'])
+def get_data():
+    complaintType = request.form.getlist('options')
+    fromTime = request.form['from']
+    toTime = request.form['to']
+
+    mongoListparam = []
+
+    for item in complaintType:
+        mongoListparam.append({"ComplaintType":item})
+
+    querydata = db.complaints.find({"CreatedDate": {"$gte":fromTime, "$lt":toTime} , "$or" : mongoListparam })
+ 
+    return querydata
+'''
 
 
 if __name__ == "__main__":
