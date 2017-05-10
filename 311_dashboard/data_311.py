@@ -36,8 +36,8 @@ def query():
     for item in complaintType:
         mongoListparam.append({"ComplaintType":item})
 
-    querydata = db.complaints.find_one({"CreatedDate": {"$gte":fromTime, "$lt":toTime} , "$or" : mongoListparam })
-    
+    querydata = db.complaints.find({"CreatedDate": {"$gte":fromTime, "$lt":toTime} , "$or" : mongoListparam })
+ 
     return render_template('index.html', query = querydata)
 
 
