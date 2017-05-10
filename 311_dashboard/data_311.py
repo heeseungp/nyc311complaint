@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import pprint
 from pymongo import MongoClient
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 
 client = MongoClient('localhost', 27017)
 db = client['visualization311']
@@ -22,8 +22,24 @@ def get_data():
 
 @app.route('/')
 def hello():
-    querydata = db.complaints.find_one()
-    return render_template('index.html', test= querydata['Agency'])
+    return render_template('index.html')
+
+# testing
+@app.route('/query', methods=['GET', 'POST'])
+def query():    
+    complaintType = request.form.getlist('options')
+    fromTime = request.form['from']
+    toTime = request.form['to']
+
+    mongoListparam = []
+
+    for item in complaintType:
+        mongoListparam.append({"ComplaintType":item})
+
+    querydata = db.complaints.find_one({"CreatedDate": {"$gte":fromTime, "$lt":toTime} , "$or" : mongoListparam })
+    
+    return render_template('index.html', query = querydata)
+
 
 if __name__ == "__main__":
     app.run(port=8000, debug=True)
