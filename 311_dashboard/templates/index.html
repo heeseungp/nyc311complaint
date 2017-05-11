@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="./static/css/bootstrap.min.css">
 
   <link rel="stylesheet" href="./static/css/slider.css">
-  
+
   <style>
     #slider .slider-selection {
       background: green;
@@ -86,9 +86,9 @@
               </div>-->
               <div class="wrapper">
                 <div class="col-sm-12 wrapper">
-                  <form action="{{ url_for('data') }}" method="POST"> 
+                  <form action="{{ url_for('data') }}" method="POST">
                     <div class="col-sm-10 checkbox" name="checkboxes">
-                        <input class="single-checkbox" type="checkbox" name="options" value="Blocked Driveway"> Blocked Driveway <br>
+                        <input class="single-checkbox" type="checkbox" name="options" checked value="Blocked Driveway"> Blocked Driveway <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="General Construction"> x General Construction <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Heating"> x Heating <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Illegal Parking"> Illegal Parking <br>
@@ -97,14 +97,14 @@
                         <input class="single-checkbox" type="checkbox" name="options" value="Street Light Condition"> Street Light Condition <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Street Condition"> Street Condition <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Water System"> Water System <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Rodent"> Rodent <br>
+                        <input class="single-checkbox" type="checkbox" name="options" checked value="Rodent"> Rodent <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Damaged Tree"> Damaged Tree <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Sanitation Condition"> Sanitation Condition <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Dirty Condition"> Dirty Conditions <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Noise"> Noise <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="ELECTRIC"> Electric <br>
                         <input class="single-checkbox" type="checkbox" name="options" value="Traffic Signal Condition"> Traffic Signal Condition <br>
-                    </div>              
+                    </div>
 
                     <div class="col-sm-2 wrapper">
                       <input name="time" id="time" type="text" style="width: auto;"/>
@@ -125,10 +125,10 @@
                 </div>
               </div>
 
-        
+
             </div>
           </div>
-        </div> 
+        </div>
 
       <!-- PANEL -->
 
@@ -162,7 +162,9 @@
       <div class="col-sm-6 col-md-4">
         <div class="chart-wrapper">
           <div class="chart-title">
-            Cell Title
+            {% for item in query %}
+            {{ item }}
+            {% endfor %}
           </div>
           <div class="chart-stage">
             <img data-src="holder.js/100%x120/white">
@@ -204,11 +206,11 @@
             value: [20,60],
             orientation: 'vertical',
             // remove tooltip to display the index of months and years
-            tooltip: "always" 
+            tooltip: "always"
 
         });
 
-        // for complaint checkbox 
+        // for complaint checkbox
         var limit = 2;
         $('input.single-checkbox').on('change', function(evt) {
           if($(this).siblings(':checked').length >= limit) {
@@ -224,20 +226,20 @@
         $("#time").on("slide", function(slideEvt) {
           month = (slideEvt.value[0]% 12) + 1;
           yr = Math.floor(slideEvt.value[0]/12);
-          
-          // just the display 
+
+          // just the display
           $("#timeValue1").text(monthNames[month-1] + " 201" + yr);
-          
+
           if(month < 10) {
             month = "0" + month;
           }
           combo_yrMonth = "201" + yr + "-" + month + "-00" + " 00:00:00"
-          
+
           ;
-          
+
           // post data
           $("#from").val(combo_yrMonth);
-                
+
         });
 
         var yr1 = "";
@@ -249,20 +251,20 @@
 
           month1 = (slideEvt.value[1] % 12) + 1;
           yr1 = Math.floor(slideEvt.value[1]/12);
-          
-          // just the display 
+
+          // just the display
           $("#timeValue2").text(monthNames[month1-1] + " 201" + yr1);
-          
+
           if(month1 < 10) {
             month1 = "0" + month1;
           }
           combo_yrMonth1 = "201" + yr1 + "-" + month1 + "-00" + " 23:59:59"
-          
+
           // post data
           $("#to").val(combo_yrMonth1);
 
-        }); 
-        
+        });
+
 
     });
   </script>
