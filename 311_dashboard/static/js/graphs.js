@@ -24,13 +24,12 @@ function makeGraphs(error, recordsJson) {
     var dateDim = cf.dimension(d => d.CreatedDate);
     var boroughDim = cf.dimension(d => d.Borough);
     var agencyDim = cf.dimension(d => d.Agency);
-    var latDim = cf.dimension(d => d.Latitude);
-    var longDim = cf.dimension(d => d.Longitude);
     var allDim = cf.dimension(d => d);
 
     // Group Data
-    var numRecordsByDate = dateDim.group();
-    var complaintTypeGroup = complaintTypeDim.group();
+    var numRecordsByDate = dateDim.group().reduceSum(d => d.Latitude.length);
+//    var complaintTypeGroup = complaintTypeDim.group();
+    var complaintTypeGroup = complaintTypeDim.group().reduceSum(d => d.Latitude.length);
     var boroughGroup = boroughDim.group();
     var agencyGroup = agencyDim.group();
     var all = cf.groupAll();
@@ -43,9 +42,21 @@ function makeGraphs(error, recordsJson) {
 
     // Charts
     var complaintChart = dc.rowChart("#complaint-type-box");
+    var timeChart = dc.barChart("#time-chart-box");
 
 
     // chart specifications
+    timeChart
+        .width(650)
+        .height(140)
+        .margins({top:10, right:50, bottom: 20, left:60})
+        .dimension(dateDim)
+        .group(numRecordsByDate)
+        .transitionDuration(500)
+        .x(d3.time.scale().domain([minDate, maxDate]))
+        .elasticY(true)
+        .yAxis().ticks(4);
+
     complaintChart
         .width(300)
         .height(200)
@@ -57,7 +68,7 @@ function makeGraphs(error, recordsJson) {
     var map = L.map('map-box');
 
     var drawMap = function() {
-        map.setView([40.730610, -73.935242], 9);
+        map.setView([40.730610, -73.935242], 11);
 		mapLink = '<a href="http://openstreetmap.org">OpenStreetMap</a>';
 		L.tileLayer(
 			'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -73,7 +84,7 @@ function makeGraphs(error, recordsJson) {
 //            console.log(d["Longitude"]);
             var zipped = _.zip(d["Latitude"], d["Longitude"]);
             _.map(zipped, function(coord) {
-                geoData.push([coord[0], coord[1], 1]);
+                geoData.push([coord[0], coord[1], ]);
             });
 	      });
 		var heat = L.heatLayer(geoData,{
@@ -86,7 +97,7 @@ function makeGraphs(error, recordsJson) {
     drawMap();
 
     //Update the heatmap if any dc chart get filtered
-	dcCharts = [complaintChart];
+	dcCharts = [complaintChart,timeChart];
 
 	_.each(dcCharts, function (dcChart) {
 		dcChart.on("filtered", function (chart, filter) {
