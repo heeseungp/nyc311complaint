@@ -203,6 +203,7 @@ function hideTooltip() {
 }
 
 function creategraph(ds){
+  d3.select(".zipcode-chart").remove();
   var data = ds;
   console.log('data for d3', data);
   var margin = {top: 40, right: 20, bottom: 30, left: 40},
