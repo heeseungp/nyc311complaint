@@ -140,7 +140,22 @@ d3.json('https://api.myjson.com/bins/12kjzt',function(error,geodata) {
 
 // Add optional onClick events for features here
 // d.properties contains the attributes (e.g. d.properties.name, d.properties.population)
-
+function clicked(d,i) {
+  var selected_zip = d.properties.postalCode;
+  var list = new Array();
+  var b1 = {letter: 'Bronx', frequency: 50000 };
+  var b2 =  {letter: 'Manhattan', frequency: 10000 };
+  var b3 = {letter: 'Brooklyn', frequency: 20000 };
+  var b4 = {letter: 'Queens', frequency: 5000 };
+  var b5 = {letter: 'Staten Island', frequency: 100000}
+  list.push(b1);  list.push(b2);  list.push(b3);  list.push(b4);
+  console.log(list);
+  if(selected_zip == "11234")
+  {
+    list.push(b5);
+  }
+  console.log(selected_zip);
+}
 
 //Update map on zoom/pan
 function zoomed() {
