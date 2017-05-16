@@ -155,6 +155,19 @@ function clicked(d,i) {
     list.push(b5);
   }
   console.log(selected_zip);
+  $.ajax({
+      type: 'GET',
+      url: '/zipcode_data',
+      contentType: 'application/json;charset=UTF-8',
+      data: {zipcode: selected_zip},
+      success: function(response)
+      {
+        var result = JSON.parse(response);
+        console.log(result.length);
+        creategraph(list);
+      }
+    })
+    
 }
 
 //Update map on zoom/pan

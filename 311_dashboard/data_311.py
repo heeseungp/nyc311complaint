@@ -24,6 +24,14 @@ data_path = './static/data/'
 #Prototype before merging
 #make sure you edit index.html for url_for to /data
 
+@app.route('/zipcode_data', methods=['GET', 'POST'])
+def zipcode_data():
+    zipcode_data = request.args.get('zipcode')
+    # zip = request.json['zipcode']
+    querydata = db.complaints.find({"CreatedDate": {"$gte":"2011-09-00 00:00:00", "$lt":"2011-10-00 00:00:00"} , "$or" : [{"ComplaintType":"Blocked Driveway"}] })
+    return dumps(querydata)
+
+
 @app.route('/data', methods=['POST'])
 def data():
     if (request.method == 'POST'):
