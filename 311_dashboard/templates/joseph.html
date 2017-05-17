@@ -1,58 +1,44 @@
 <html>
 <head>
   <title>A Leaflet map!</title>
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"   integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="   crossorigin="anonymous"></script>
-  <script src="static/js/leaflet.ajax.min" type=text/javascript""></script>
-  <script src="proj4.js"></script>
-  <script src="proj4leaflet.js"></script>
-  
+  <link rel="stylesheet" href="../static/css/leaflet.css"/>
+  <script src="../static/js/leaflet.js"></script>
+  <script src="../static/js/jquery.min.js"></script>
+
   <style>
     #map{ 
       height: 982px;
       width: 955px;
     }
   </style>
+
 </head>
 <body>
 
   <div id="map"></div>
 
   <script>
-
   // initialize the map
   var map = L.map('map').setView([40.7128, -74.0059], 11);
 
   // load a tile layer
   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
     {
-      maxZoom: 11,
+      maxZoom: 15,
       minZoom: 11
     }).addTo(map);
 
-  // boros.crs = '
-  // +proj=lcc 
-  // +lat_1=41.03333333333333 
-  // +lat_2=40.66666666666666 
-  // +lat_0=40.16666666666666 
-  // +lon_0=-74 
-  // +x_0=300000.0000000001 
-  // +y_0=0 
-  // +ellps=GRS80 
-  // +datum=NAD83 
-  // +to_meter=0.3048006096012192 
-  // +no_defs '
 
-
-  var imageUrl = 'qqq.png',
-    imageBounds = [[40.496300, -74.275076], [40.905760, -73.700027]];
-
+  // this takes the image and puts a layer on top
+  var imgPath = 'kdelayer/';
+  var imageUrl = imgPath + 'queens.png',
+    imageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]];
   L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 
-
-  $.getJSON("nyczipcodes.geojson", function(hoodData) {
+  // this function will take nyczipcode geojson file an make boundaries
+  var nyczipcodefile = "zipcode/nyczipcodes.geojson";
+  $.getJSON(nyczipcodefile, function(hoodData) {
     L.geoJson( hoodData,{style: { color: "#000000", fillColor: "#f7f7f7", weight: 5 }, 
     onEachFeature: function( feature, layer ){
       layer.bindPopup( "<strong>" + feature.properties.postalCode + "</strong><br/>" +
@@ -63,9 +49,10 @@
   });
   
 
+  // when you click on any point in the map, it will return the latitude and longitude
   map.on('click', function(e) {
     alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-});
+  });
 
 //   //load the zipcodes
 //   $.getJSON("neighborhoods.geojson", function(hoodData) {
