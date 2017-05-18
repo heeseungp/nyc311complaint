@@ -27,6 +27,7 @@ html,body{
     font-weight: 300;
     text-align: center;
 }
-#map{
-    height: 60%
+#mapSection{
+    margin:10px;
+    height: 80%
 }
