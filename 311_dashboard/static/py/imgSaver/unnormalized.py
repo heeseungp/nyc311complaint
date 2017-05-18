@@ -1,3 +1,5 @@
+# this python function will convert the unnormalized KDE to an PNG image for later usage in Leaflet
+
 import os
 totalMonths = 5;
 currentDirectory = os.getcwd()
