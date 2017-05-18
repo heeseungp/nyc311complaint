@@ -30,15 +30,15 @@
 
 
   // this takes the image and puts a layer on top
-  var imgPath = 'kdelayer/';
-  var imageUrl = imgPath + 'queens.png',
-    imageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]];
+  var imgPath = 'data311/kdelayer/';
+  var imageUrl = imgPath + 'foo.png',
+    imageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
     // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]];
   L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 
   // this function will take nyczipcode geojson file an make boundaries
-  var nyczipcodefile = "zipcode/nyczipcodes.geojson";
+  var nyczipcodefile = "data311/zipcode/nyczipcodes.geojson";
   $.getJSON(nyczipcodefile, function(hoodData) {
     L.geoJson( hoodData,{style: { color: "#000000", fillColor: "#f7f7f7", weight: 5 }, 
     onEachFeature: function( feature, layer ){

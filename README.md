@@ -1,5 +1,9 @@
 ## 311 Data Visualization Project ##
 
+Download Normalized and UnNormalized images from DropBox (https://www.dropbox.com/s/nqeqcv55ueq2f6h/kdelayer.zip?dl=0)
+After download this zip, put the entire unzipped "kdelayer" folder inside /template/data311/
+
+
 Import your .csv 311 data file to MongoDB (for locally stored db)
 ```
 
