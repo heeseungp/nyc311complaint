@@ -1,0 +1,32 @@
+html,body{
+    height:100%;
+    width: 100%;
+}
+/* cover */
+/*img{
+    max-width: 100%;
+}*/
+#cover{
+    background: #222 url('/static/images/background1.jpg');
+    background-repeat: no-repeat;
+    height: 100%;
+    background-size: cover;
+    /*background-position: top;*/
+    /*background-attachment: fixed;*/
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*width: 100%;*/
+}
+.display-3{
+    color: white;
+    background-color: rgba(153, 153, 153, 0.6);
+    font-size: 60px;
+    font-weight: 300;
+    text-align: center;
+}
+#map{
+    height: 60%
+}
