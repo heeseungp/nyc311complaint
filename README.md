@@ -11,7 +11,10 @@ After download this zip, put the entire unzipped "kdelayer" folder inside /templ
 
 Import your .csv 311 data file to MongoDB (for locally stored db)
 ```
+https://www.dropbox.com/s/rpm4a8p49hirnh5/311_Data.csv?dl=0
+```
 
+```
 #!bash
 mongoimport -d visualization311 -c complaints --type csv --file 311_Data.csv --headerline
 mongoimport -d visualization311 -c population --type csv --file population.csv --headerline
