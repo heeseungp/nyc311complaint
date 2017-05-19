@@ -36,15 +36,13 @@ html,body{
     text-align: center;
 }
 #mapSection{
-    /*height: 150%*/
+    margin-top: 20px;
+    height: 100%;
 }
 #map{
-    margin-left: -65px;
+    /*margin-left: -65px;*/
     width: 100%;
-    height: 50%;
-}
-#radioButtons{
-    margin-top: 20px;
+    height: 80%;
 }
 
 /*Shassan's CSS*/
@@ -136,4 +134,7 @@ circle {
     border: 20px solid red;
     height: 100px;
     border-radius: 50%;
+}
+#text-section1{
+  height: 60%;
 }
