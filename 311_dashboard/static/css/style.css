@@ -20,6 +20,14 @@ html,body{
     justify-content: center;
     /*width: 100%;*/
 }
+
+.zipcode-chart{
+  height: 800px!important;
+  margin-left: 100px!important;
+}
+.chart{
+  margin-bottom: 300px!important;
+}
 .display-3{
     color: white;
     background-color: rgba(153, 153, 153, 0.6);
@@ -28,7 +36,7 @@ html,body{
     text-align: center;
 }
 #mapSection{
-    height: 150%
+    /*height: 150%*/
 }
 #map{
     margin-left: -65px;
@@ -65,7 +73,7 @@ div.tooltip {
 .axis line {
   fill: none;
   stroke: #000;
-  shape-rendering: crispEdges;
+  shape-rendering: geometricPrecision;
 }
 
 .bar {
