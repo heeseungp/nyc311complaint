@@ -235,6 +235,39 @@ function clicked(d,i) {
         creategraph(data_array);
       }
     })
+	
+	
+	$.ajax({
+      type: 'GET',
+      url: '/population_data',
+      async: false,
+      contentType: 'application/json;charset=UTF-8',
+      // data: {zipcode: selected_zip},
+      success: function(response)
+      {
+        var result = JSON.parse(response);
+        population_data = result[0];
+        var complaint_data = result[1];
+        for(i = 0; i < complaint_data.length; i++)
+        {
+          var a = new Array();
+          a.push(complaint_data[i].Density);
+          var zip = complaint_data[i]._id.ZipCode;
+          for(j = 0; j < population_data.length; j++)
+          {
+            if(population_data[j].Zip == zip)
+            {
+              a.push(parseInt(population_data[j].Population));
+            }
+          }
+          if(a.length == 2){
+          population_array.push(a);
+        }
+        }
+        console.log(population_array);
+        scatterplot(population_array);
+      }
+    })
 
 }
 
