@@ -79,11 +79,16 @@ body {
   left: 0;
 }
 
+.tick{
+  font-size: 9pt!important;
+}
+
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="http://d3js.org/topojson.v1.min.js"></script>
 <script src="/static/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
 <script>
 
@@ -143,28 +148,79 @@ d3.json('https://api.myjson.com/bins/12kjzt',function(error,geodata) {
 function clicked(d,i) {
   var selected_zip = d.properties.postalCode;
   var list = new Array();
-  var b1 = {letter: 'Bronx', frequency: 50000 };
-  var b2 =  {letter: 'Manhattan', frequency: 10000 };
-  var b3 = {letter: 'Brooklyn', frequency: 20000 };
-  var b4 = {letter: 'Queens', frequency: 5000 };
-  var b5 = {letter: 'Staten Island', frequency: 100000}
-  list.push(b1);  list.push(b2);  list.push(b3);  list.push(b4);
-  console.log(list);
-  if(selected_zip == "11234")
-  {
-    list.push(b5);
-  }
+  var months = new Array();
+  var complaints = new Array();
+  var data_array = new Array();
+  // var b1 = {letter: 'Bronx', frequency: 50000 };
+  // var b2 =  {letter: 'Manhattan', frequency: 10000 };
+  // var b3 = {letter: 'Brooklyn', frequency: 20000 };
+  // var b4 = {letter: 'Queens', frequency: 5000 };
+  // var b5 = {letter: 'Staten Island', frequency: 100000}
+  // list.push(b1);  list.push(b2);  list.push(b3);  list.push(b4);
+  // console.log(list);
+  // if(selected_zip == "11234")
+  // {
+  //   list.push(b5);
+  // }
   console.log(selected_zip);
   $.ajax({
       type: 'GET',
       url: '/zipcode_data',
+      async: false,
       contentType: 'application/json;charset=UTF-8',
       data: {zipcode: selected_zip},
       success: function(response)
       {
         var result = JSON.parse(response);
-        console.log(result.length);
-        creategraph(list);
+        var count = 0;
+        var total_count = 0;
+        var noise_count = 0;
+        for(i = 0; i < result.length; i++)
+        {
+          if(complaints.indexOf(result[i].ComplaintType) == -1)
+          {
+            if(result[i].ComplaintType.indexOf("Noise") == -1){
+              complaints.push(result[i].ComplaintType);
+            }
+          }
+        }
+        complaints.push("Noise - Commercial");
+
+        for(j = 0; j < complaints.length; j++)
+        {
+          for(k = 0; k < result.length; k++)
+          {
+                if(result[k].ComplaintType == complaints[j])
+                {
+                  count++;
+                }
+
+          }
+          total_count += count;
+          var obj = {"ComplaintType": complaints[j], "Density": count, "Total": count};
+          data_array.push(obj);
+          count = 0;
+        }
+        for(i = 0; i < data_array.length; i++)
+        {
+          data_array[i].Density = (data_array[i].Density/total_count * 100);
+        }
+        data_array.sort(function(a, b,)
+        {
+          return b.Total - a.Total;
+        })
+        creategraph(data_array);
+
+        // console.log(result);
+        // var count1 = 0;
+        // var count2 = 0;
+        // var count3 = 0;
+        // var count4 = 0;
+        // for(i =  0; i < result.length; i++)
+        // {
+        //     console.log(moment(result[i].CreatedDate).format('MMYY'));
+        // }
+        // creategraph(list);
       }
     })
 
@@ -207,7 +263,7 @@ function creategraph(ds){
   var data = ds;
   console.log('data for d3', data);
   var margin = {top: 40, right: 20, bottom: 30, left: 40},
-      width = 960 - margin.left - margin.right,
+      width = 1300 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom;
 
   var formatPercent = d3.format(".0%");
@@ -231,7 +287,7 @@ function creategraph(ds){
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function(d) {
-      return "<strong>Frequency:</strong> <span style='color:red'>" + d.frequency + "</span>";
+      return "<strong style='font-size: 16pt;'>Frequency:</strong> <span style='color:green; font-size: 16pt;'>" + d.Density.toFixed(2) + '%' + ' ' + '(' +  d.Total + ')' + "</span>";
     })
 
   var svg = d3.select("body").append("svg")
@@ -245,8 +301,8 @@ function creategraph(ds){
 
   // The new data variable.
   // The following code was contained in the callback function.
-  x.domain(data.map(function(d) { return d.letter; }));
-  y.domain([0, d3.max(data, function(d) { return d.frequency; })]);
+  x.domain(data.map(function(d) { return d.ComplaintType; }));
+  y.domain([0, d3.max(data, function(d) { console.log(d.Density); return d.Density; })]);
 
   svg.append("g")
       .attr("class", "x axis")
@@ -260,22 +316,20 @@ function creategraph(ds){
       .attr("transform", "rotate(-90)")
       .attr("y", 6)
       .attr("dy", ".71em")
-      .style("text-anchor", "end")
-      .text("Frequency");
 
   svg.selectAll(".bar")
       .data(data)
     .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.letter); })
+      .attr("x", function(d) { return x(d.ComplaintType); })
       .attr("width", x.rangeBand())
-      .attr("y", function(d) { return y(d.frequency); })
-      .attr("height", function(d) { return height - y(d.frequency); })
+      .attr("y", function(d) { return y(d.Density); })
+      .attr("height", function(d) { return height - y(d.Density); })
       .on('mouseover', tip.show)
       .on('mouseout', tip.hide)
 
   function type(d) {
-    d.frequency = +d.frequency;
+    d.Density = +d.Density;
     return d;
   }
 }

@@ -23,8 +23,11 @@ data_path = './static/data/'
 @app.route('/zipcode_data', methods=['GET', 'POST'])
 def zipcode_data():
     zipcode_data = request.args.get('zipcode')
+    print('hello world')
+    print(zipcode_data)
     # zip = request.json['zipcode']
-    querydata = db.complaints.find({"CreatedDate": {"$gte":"2011-09-00 00:00:00", "$lt":"2011-10-00 00:00:00"} , "$or" : [{"ComplaintType":"Blocked Driveway"}] })
+    querydata = db.complaints.find({"ZipCode":int(zipcode_data)})
+    # querydata = db.complaints.find({"CreatedDate": {"$gte":"2011-09-00 00:00:00", "$lt":"2011-10-00 00:00:00"} , "$or" : [{"ComplaintType":"Blocked Driveway", "ComplaintType":"Rodent"}] })
     return dumps(querydata)
 
 
