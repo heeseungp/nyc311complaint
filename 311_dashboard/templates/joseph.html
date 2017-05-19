@@ -12,13 +12,12 @@
   <!-- <script src="../static/js/bootstrap-min.js"></script> -->
   <script src="../static/js/bootstrap-slider.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <style>
+<!--   <style>
     #map{
-        margin-left: -65px;
         width: 100%;
         height: 50%;
     }
-  </style>
+  </style> -->
 </head>
 <body>
     
@@ -38,22 +37,25 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Complaint Type <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Noise - Residential</a></li>
-            <li><a href="#">Street Condition</a></li>
-            <li><a href="#">Plumbing</a></li>
-            <li><a href="#">Blocked Driveway</a></li>
-            <li><a href="#">Water System</a></li>
-            <li><a href="#">Street Light Condition</a></li>
-            <li><a href="#">Noise</a></li>
-            <li><a href="#">Electric</a></li>
-            <li><a href="#">Dirty Conditions</a></li>
-            <li><a href="#">Noise - Commercial</a></li>
-            <li><a href="#">Damaged Tree</a></li>
-            <li><a href="#">Sanitation Condition</a></li>
-            <li><a href="#">Traffic Signal Condition</a></li>
-            <li><a href="#">Rodent</a></li>
+            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential" checked="true" > Noise - Residential</a></li>
+            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="check(this.value)" value="Street Condition"> Street Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="PLUMBING"> Plumbing</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Blocked Driveway"> Blocked Driveway</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Water System"> Water System</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Street Light Condition"> Street Light Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Noise"> Noise</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="ELECTRIC"> Electric</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Dirty Conditions"> Dirty Conditions</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Commercial"> Noise - Commercial</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Damaged Tree"> Damaged Tree</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Sanitation Condition"> Sanitation Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Traffic Signal Condition"> Traffic Signal Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Rodent"> Rodent</a></li>
           </ul>
         </li>
+         <li class="dropdown">
+          <li><a href="#mapSection"> <input id="NormalizedID" type="radio" name="toggleType" value="Normalized" > Normalized</a></li>
+          <li><a href="#mapSection"> <input id="UnnormalizedID" type="radio" name="toggleType" value="Normalized" > Unnormalized</a></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -69,27 +71,9 @@
 <section id="mapSection">
   <div class="container">
     <div class="row">
-      <div class="col-sm-10">
+      <div class="col-sm-12">
         <div id="map"></div>
       </div>
-      <div class="col-sm-2">
-      <form id="radioButtons">
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential" checked="true" >Noise - Residential<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Street Condition">Street Condition<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="PLUMBING">PLUMBING<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Blocked Driveway">Blocked Driveway<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Water System">Water System<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Street Light Condition">Street Light Condition<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise">Noise<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="ELECTRIC">ELECTRIC<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Dirty Conditions">Dirty Conditions<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Commercial">Noise - Commercial<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Damaged Tree">Damaged Tree<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Sanitation Condition">Sanitation Condition<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Traffic Signal Condition">Traffic Signal Condition<br>
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Rodent">Rodent<br>
-            <br>   
-            <input type="text" id="answer" size="20">
 
             <!--slider-->
             <input id="monthSlider" data-slider-id='pointerSlide' type="text" data-slider-min="0" data-slider-max="83" data-slider-step="1" data-slider-value="0" value="0"/>
@@ -99,8 +83,8 @@
             </div>
 
             <input id="from" type="hidden" name="from" value="2010-01-00 00:00:00">
-      </form>
-      </div>
+<!--       </form> -->
+<!--       </div> -->
   </section>
 
   <script>
@@ -144,6 +128,9 @@
 
       month = document.getElementById("monthSlider").value;
       normalized = false;
+      if(document.getElementById('NormalizedID').checked){
+        normalized = true;
+      }
       normalized_path = "";
       if(normalized != false) normalized_path = "normalized";
       else normalized_path = "unnormalized";
