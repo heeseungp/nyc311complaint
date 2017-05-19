@@ -1,4 +1,4 @@
-import pandas as pd
+
 import json
 import pprint
 from pymongo import MongoClient
@@ -19,6 +19,33 @@ data_path = './static/data/'
 
 #Prototype before merging
 #make sure you edit index.html for url_for to /data
+
+
+@app.route('/population_data', methods=['GET', 'POST'])
+def population_data():
+    population = db.population.find()
+    # querydata = db.complaints.find({"CreatedDate": {"$gte":"2010-01-00 00:00:00", "$lt":"2010-12-00 00:00:00"}})
+    querydata = db.complaints.aggregate([
+        {'$match':
+            {
+            'CreatedDate':
+                {
+                    "$gte":"2010-01-00 00:00:00", "$lt":"2010-12-00 00:00:00"
+                }
+            }
+        },
+        { '$group':
+            { '_id': {'ZipCode': '$ZipCode'},
+                'Density': {'$sum': 1}
+            }
+        }
+    ])
+    list = []
+    list.append(population)
+    list.append(querydata)
+    # querydata = db.complaints.find({"CreatedDate": {"$gte":"2011-09-00 00:00:00", "$lt":"2011-10-00 00:00:00"} , "$or" : [{"ComplaintType":"Blocked Driveway", "ComplaintType":"Rodent"}] })
+    return dumps(list)
+
 
 @app.route('/zipcode_data', methods=['GET', 'POST'])
 def zipcode_data():
