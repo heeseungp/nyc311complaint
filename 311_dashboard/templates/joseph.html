@@ -1,13 +1,16 @@
 <html>
 <head>
   <title>A Leaflet map!</title>
-  <link rel="stylesheet" href="../static/css/leaflet.css"/>
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+  integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+  crossorigin=""/>
   <!--   <link rel="stylesheet" href="../static/css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/slider.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <script src="../static/js/leaflet.js"></script>
-  <script src="../static/js/jquery.min.js"></script>
+ <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+  integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+  crossorigin=""></script>
   <script src="../static/js/jquery.min.js"></script>
   <!-- <script src="../static/js/bootstrap-min.js"></script> -->
   <script src="../static/js/bootstrap-slider.js"></script>
@@ -46,7 +49,7 @@
         </li>
         <li class="dropdown">
         <li><a href="#mapSection"> <input id="NormalizedID" type="radio" name="toggleType" value="Normalized" > Normalized</a></li>
-        <li><a href="#mapSection"> <input id="UnnormalizedID" type="radio" name="toggleType" value="Normalized" > Unnormalized</a></li>
+        <li><a href="#mapSection"> <input id="UnnormalizedID" type="radio" name="toggleType" value="UnNormalized" checked="True" > Unnormalized</a></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -124,6 +127,9 @@
 
       month = document.getElementById("monthSlider").value;
       normalized = false;
+      if (document.getElementById('NormalizedID').checked){
+        normalized = true;
+      }
       normalized_path = "";
       if(normalized != false) normalized_path = "normalized";
       else normalized_path = "unnormalized";
