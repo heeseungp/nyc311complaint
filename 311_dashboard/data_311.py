@@ -23,6 +23,11 @@ data_path = './static/data/'
 
 @app.route('/population_data', methods=['GET', 'POST'])
 def population_data():
+    start_year = request.args.get('start_year')
+    end_year = request.args.get('end_year')
+    print('PYTHON YEARS')
+    print(start_year)
+    print(end_year)
     population = db.population.find()
     # querydata = db.complaints.find({"CreatedDate": {"$gte":"2010-01-00 00:00:00", "$lt":"2010-12-00 00:00:00"}})
     querydata = db.complaints.aggregate([
@@ -30,7 +35,7 @@ def population_data():
             {
             'CreatedDate':
                 {
-                    "$gte":"2010-01-00 00:00:00", "$lt":"2010-12-00 00:00:00"
+                    "$gte": start_year, "$lt":end_year
                 }
             }
         },
@@ -50,10 +55,10 @@ def population_data():
 @app.route('/zipcode_data', methods=['GET', 'POST'])
 def zipcode_data():
     zipcode_data = request.args.get('zipcode')
-    print('hello world')
-    print(zipcode_data)
+    start_month = request.args.get('start_month')
+    end_month = request.args.get('end_month')
     # zip = request.json['zipcode']
-    querydata = db.complaints.find({"ZipCode":int(zipcode_data)})
+    querydata = db.complaints.find({"CreatedDate": {"$gte":start_month, "$lt":end_month}, "$and" : [{"ZipCode": int(zipcode_data)}]})
     # querydata = db.complaints.find({"CreatedDate": {"$gte":"2011-09-00 00:00:00", "$lt":"2011-10-00 00:00:00"} , "$or" : [{"ComplaintType":"Blocked Driveway", "ComplaintType":"Rodent"}] })
     return dumps(querydata)
 
