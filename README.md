@@ -8,7 +8,8 @@ Import your .csv 311 data file to MongoDB (for locally stored db)
 ```
 
 #!bash
-mongoimport -d visualization311 -c complaints --type csv --file 311_Data_15_Complaint_Types.csv --headerline
+mongoimport -d visualization311 -c complaints --type csv --file 311_Data.csv --headerline
+mongoimport -d visualization311 -c population --type csv --file population.csv --headerline
 
 ```
 
