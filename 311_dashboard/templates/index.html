@@ -17,179 +17,21 @@
   </style>
 
 </head>
-<body class="application">
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="./">311 Data</a>
-        </div>
-      </div>
+  
+    <input name="time" id="time" type="text" style="width: auto;"/>
+
+    <input id="from" type="hidden" name="from" value="2011-09-00 00:00:00">
+    <input id="to" type="hidden" name="to" value="2015-01-00 00:00:00">
+
+
+      <div class="wrapper">
+      <span>From: <span id="timeValue1">September 2011</span></span> <br>
+      <span>To: <span id="timeValue2">January 2015</span></span>
     </div>
 
-  <section id="cover">
-      <h1 class="display-3">311 Complaints Data Visualization</h1>
-  </section>
-
-  <section id="map">
-  </section>
-<!--   <div class="container-fluid">
-
-    <div class="row"> -->
-
-    <!-- MAP -->
- <!--      <div class="col-sm-10">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <div id="map-box" style="width: 800px; height: 400px">
-            </div>
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
-        </div>
-      </div>
-      </div> -->
-      <!-- MAP -->
-
-      <!-- PANEL -->
-        <!-- <div class="col-sm-2 container">
-          <div class="chart-wrapper">
-            <div class="chart-stage"> -->
-
-              <!--Button does not disable for some reason when you've selected more than 2 -->
-
-              <!--<div class="btn-group-vertical" data-toggle="buttons">
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option1" autocomplete="off"> Blocked Driveway
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option2" autocomplete="off"> General Construction
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option3" autocomplete="off"> Heating
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option4" autocomplete="off"> Illegal Parking
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option5" autocomplete="off"> Plumbing
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option6" autocomplete="off"> Residential Noise
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option7" autocomplete="off"> Street Light Condition
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option8" autocomplete="off"> Street Condition
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option9" autocomplete="off"> Water System
-                </label>
-                <label class="btn btn-primary btn-lg btn-block">
-                  <input class="single-checkbox" type="checkbox" name="options" id="option10" autocomplete="off"> Water (Heat/Hot)
-                </label>
-              </div>-->
-              <!-- <div class="wrapper">
-                <div class="col-sm-12 wrapper">
-                  <form action="{{ url_for('data') }}" method="POST">
-                    <div class="col-sm-10 checkbox" name="checkboxes">
-                        <input class="single-checkbox" type="checkbox" name="options" checked value="Blocked Driveway"> Blocked Driveway <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="General Construction"> x General Construction <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Heating"> x Heating <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Illegal Parking"> Illegal Parking <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="PLUMBING"> Plumbing <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Noise - Residential"> Residential Noise <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Street Light Condition"> Street Light Condition <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Street Condition"> Street Condition <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Water System"> Water System <br>
-                        <input class="single-checkbox" type="checkbox" name="options" checked value="Rodent"> Rodent <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Damaged Tree"> Damaged Tree <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Sanitation Condition"> Sanitation Condition <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Dirty Condition"> Dirty Conditions <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Noise"> Noise <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="ELECTRIC"> Electric <br>
-                        <input class="single-checkbox" type="checkbox" name="options" value="Traffic Signal Condition"> Traffic Signal Condition <br>
-                    </div>
-
-                    <div class="col-sm-2 wrapper">
-                      <input name="time" id="time" type="text" style="width: auto;"/>
-
-                      <input id="from" type="hidden" name="from" value="2011-09-00 00:00:00">
-                      <input id="to" type="hidden" name="to" value="2015-01-00 00:00:00">
-                    </div>
-
-                    <input type ="submit">
-
-                  </form>
-
-                   <div class="wrapper">
-                    <span>From: <span id="timeValue1">September 2011</span></span> <br>
-                    <span>To: <span id="timeValue2">January 2015</span></span>
-                  </div>
-
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div> -->
-
-      <!-- PANEL -->
-
-   <!--  <div class="row">
-      <div class="col-sm-6 col-md-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x120/white">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Cell Title
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x120/white">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
-        </div>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            {% for item in query %}
-            {{ item }}
-            {% endfor %}
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x120/white">
-          </div>
-          <div class="chart-notes">
-            Notes about this chart
-          </div>
-        </div>
-      </div> -->
-<!-- end of three -->
-
-    <!-- <hr> -->
-
-  <!-- </div> -->
-
+      
+<body>
   <script src="./static/js/jquery.min.js"></script>
   <script src="./static/js/bootstrap.min.js"></script>
   <script src="./static/js/underscore-min.js"></script>
@@ -204,7 +46,7 @@
 
   <script src="./static/js/bootstrap-slider.js"></script>
 
-  <!-- <script type="text/javascript">
+   <script type="text/javascript">
       $(document).ready(function() {
 
         // for slider
@@ -277,7 +119,7 @@
 
 
     });
-  </script> -->
+  </script> 
 
 </body>
 </html>
