@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>A Leaflet map!</title>
+  <title>311 Data Vis</title>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
   crossorigin=""/>
@@ -25,9 +25,13 @@
     height: 100%;
 }
 #map{
-    margin-left: -65px;
+    /*margin-left: -65px;*/
     width: 100%;
     height: 80%;
+}
+#monthSlider{
+  width: 350%;
+  text: center;
 }
 </style>
 </head>
@@ -86,18 +90,19 @@
       <div class="text">
         <h1>311 Dashboard</h1>
         <p>Since the creation of New York City’s open data law (Local Law 11 of 2012), the growing amount of data that is publicly recorded has burgeoned. And while the open data movement has made the data more accessible, interpreting it has not been any easier. According to Fast.Co Design, a business media brand, as quoted from this article, “… there wasn’t a tool to generate broad, location-based insights for people at the top”. As a result, a new dashboard was created for the Mayor’s Office in January of 2017. However the dashboard is not available for public use, and it is in this context that we believe we can offer our services to bridge this gap for those interested in exploring this data.
-</p>
+      </p>
       </div>
       </div>
       </div>
       </div>
     <!--slider-->
+    <div id="sliderMiddle">
     <input id="monthSlider" data-slider-id='pointerSlide' type="text" data-slider-min="0" data-slider-max="83" data-slider-step="1" data-slider-value="0" value="0"/>
     <!-- what it says visually for humans-->
     <div class="wrapper">
       <span><span id="timeValue1">January 2010</span></span> <br>
     </div>
-
+    </div>
     <input id="from" type="hidden" name="from" value="2010-01-00 00:00:00">
 <!--       </form> -->
 <!--       </div> -->
@@ -141,9 +146,9 @@
         var population_array = new Array();
         var zipcode_array = new Array();
         var start_month = $("#timeValue1").text();
-        var start_year = moment(start_month).format("YYYY-01-DD HH:mm:ss");
-        var end_year = moment(start_month).add(1, 'years')._d;
-        end_year = moment(end_year).format("YYYY-01-DD HH:mm:ss");
+        // var start_year = moment(start_month).format("YYYY-01-DD HH:mm:ss");
+        // var end_year = moment(start_month).add(1, 'years')._d;
+        // end_year = moment(end_year).format("YYYY-01-DD HH:mm:ss");
         start_month = moment(start_month).format("YYYY-MM-DD HH:mm:ss");
         end_month = moment(start_month).add(1, 'months')._d;
         end_month = moment(end_month).format("YYYY-MM-DD HH:mm:ss");
@@ -205,7 +210,7 @@
             url: '/population_data',
             async: false,
             contentType: 'application/json;charset=UTF-8',
-            data: {start_year: start_year, end_year: end_year},
+            data: {start_month: start_month, end_month: end_month},
             success: function(response)
             {
               var result = JSON.parse(response);
@@ -396,7 +401,7 @@
                 .attr("y", "50")
                 .style('font-size', '20pt')
                 .style('font-weight', 'bolder')
-                .text("Population vs. Number of Reported Complaints");
+                .text("Number of complaints over Zipcode Population");
 
                 main.append("text")
                     .attr("class", "x label")
