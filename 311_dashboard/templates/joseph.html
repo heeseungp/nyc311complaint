@@ -7,13 +7,6 @@
   <script src="../static/js/leaflet.js"></script>
   <script src="../static/js/jquery.min.js"></script>
 
-  <style>
-    #map{ 
-      height: 100%;
-      width: 60%;
-    }
-  </style>
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -23,39 +16,34 @@
         </div>
       </div>
     </div>
-  <section id="cover">
-      <h1 class="display-3">311 Complaints Data Visualization</h1>
-  </section>
-'Noise - Residential' 'Street Condition', 'PLUMBING',
-       'Blocked Driveway', 'Water System', 'Street Light Condition',
-       'Noise', 'ELECTRIC', 'Dirty Conditions', 'Noise - Commercial',
-       'Damaged Tree', 'Sanitation Condition', 'Traffic Signal Condition',
-       'Rodent']
-  <section id="mapSection">
-    <div id="map"></div>
-
-
-<form>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential">Noise - Residential<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Street Condition">Street Condition<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="PLUMBING">PLUMBING<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Blocked Driveway">Blocked Driveway<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Water System">Water System<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Street Light Condition">Street Light Condition<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Noise">Noise<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="ELECTRIC">ELECTRIC<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Dirty Conditions">Dirty Conditions<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Commercial">Noise - Commercial<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Damaged Tree">Damaged Tree<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Sanitation Condition">Sanitation Condition<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Traffic Signal Condition">Traffic Signal Condition<br>
-      <input type="radio" name="complaint" onclick="check(this.value)" value="Rodent">Rodent<br>
-      <br>   
-      <input type="text" id="answer" size="20">
-</form>
-
-
-
+<section id="cover">
+    <h1 class="display-3">311 Complaints Data Visualization</h1>
+</section>
+<section id="mapSection">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-10">
+        <div id="map"></div>
+      </div>
+      <div class="col-sm-2">
+      <form id="radioButtons">
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential">Noise - Residential<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Street Condition">Street Condition<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="PLUMBING">PLUMBING<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Blocked Driveway">Blocked Driveway<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Water System">Water System<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Street Light Condition">Street Light Condition<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise">Noise<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="ELECTRIC">ELECTRIC<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Dirty Conditions">Dirty Conditions<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Commercial">Noise - Commercial<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Damaged Tree">Damaged Tree<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Sanitation Condition">Sanitation Condition<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Traffic Signal Condition">Traffic Signal Condition<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Rodent">Rodent<br>
+            <br>   
+      </form>
+      </div>
   </section>
 
   <script>
