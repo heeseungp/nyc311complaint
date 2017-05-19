@@ -2,11 +2,21 @@
 <head>
   <title>A Leaflet map!</title>
   <link rel="stylesheet" href="../static/css/leaflet.css"/>
-  <link rel="stylesheet" href="./static/css/bootstrap.min.css">
-  <link rel="stylesheet" href="./static/css/style.css">
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="../static/css/slider.css">
   <script src="../static/js/leaflet.js"></script>
   <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/bootstrap-slider.js"></script>
 
+  <style>
+    #map{
+        margin-left: -65px;
+        width: 100%;
+        height: 50%;
+    }
+  </style>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -27,7 +37,7 @@
       </div>
       <div class="col-sm-2">
       <form id="radioButtons">
-            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential">Noise - Residential<br>
+            <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential" checked="true" >Noise - Residential<br>
             <input type="radio" name="complaint" onclick="check(this.value)" value="Street Condition">Street Condition<br>
             <input type="radio" name="complaint" onclick="check(this.value)" value="PLUMBING">PLUMBING<br>
             <input type="radio" name="complaint" onclick="check(this.value)" value="Blocked Driveway">Blocked Driveway<br>
@@ -42,85 +52,109 @@
             <input type="radio" name="complaint" onclick="check(this.value)" value="Traffic Signal Condition">Traffic Signal Condition<br>
             <input type="radio" name="complaint" onclick="check(this.value)" value="Rodent">Rodent<br>
             <br>   
+            <input type="text" id="answer" size="20">
+
+            <!--slider-->
+            <input id="monthSlider" data-slider-id='pointerSlide' type="text" data-slider-min="0" data-slider-max="83" data-slider-step="1" data-slider-value="0" value="0"/>
+            <!-- what it says visually for humans-->
+            <div class="wrapper">
+              <span><span id="timeValue1">January 2010</span></span> <br>
+            </div>
+
+            <input id="from" type="hidden" name="from" value="2010-01-00 00:00:00">
       </form>
       </div>
   </section>
 
   <script>
-function check(complaint) {
-    document.getElementById("answer").value=complaint;
-}
-  // initialize the map
-  var map = L.map('map').setView([40.7128, -74.0059], 11);
+    // initialize the map
+    var map = L.map('map').setView([40.7128, -74.0059], 11);
+    // map.createPane('zipcode');
+    // map.getPane('zipcode').style.zIndex = 650;
 
-  // load a tile layer
-  L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
-    {
-      maxZoom: 15,
-      minZoom: 11
-    }).addTo(map);
+    // load a tile layer
+    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+      {
+        maxZoom: 15,
+        minZoom: 11
+      }).addTo(map);
 
-
-  // this takes the image and puts a layer on top
-  var imgPath = 'data311/kdelayer/';
-  var imageUrl = imgPath + 'foo.png',
-    imageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
-    // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]];
-  L.imageOverlay(imageUrl, imageBounds).addTo(map);
-
-
-  // this function will take nyczipcode geojson file an make boundaries
-  var nyczipcodefile = "data311/zipcode/nyczipcodes.geojson";
-  $.getJSON(nyczipcodefile, function(hoodData) {
-    L.geoJson( hoodData,{style: { color: "#000000", fillColor: "#f7f7f7", weight: 5 }, 
-    onEachFeature: function( feature, layer ){
-      layer.bindPopup( "<strong>" + feature.properties.postalCode + "</strong><br/>" +
-                       "<strong>" + feature.properties.PO_NAME + "</strong><br/>" +
-                       "<strong>" + feature.properties.borough + "</strong><br/>")
-    }
-    }).addTo(map);
-  });
-  
-
-  // when you click on any point in the map, it will return the latitude and longitude
-  map.on('click', function(e) {
-    alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng)
-  });
-
-//   //load the zipcodes
-//   $.getJSON("neighborhoods.geojson", function(hoodData) {
-//     L.geoJson( hoodData, {
-//     style: function(feature){
-//       var fillColor,
-//           density = feature.properties.density;
-//       if ( density > 80 ) fillColor = "#006837";
-//       else if ( density > 40 ) fillColor = "#31a354";
-//       else if ( density > 20 ) fillColor = "#78c679";
-//       else if ( density > 10 ) fillColor = "#c2e699";
-//       else if ( density > 0 ) fillColor = "#ffffcc";
-//       else fillColor = "#f7f7f7";  // no data
-//       return { color: "#999", weight: 1, fillColor: fillColor, fillOpacity: .6 };
-//     },
-//     onEachFeature: function( feature, layer ){
-//       layer.bindPopup( "<strong>" + feature.properties.Name + "</strong><br/>" + feature.properties.density + " rats per square mile" )
-//     }
-//   } ).addTo(map);
-//   });
-  
-// for each rodent
-//   // load GeoJSON from an external file
-//   $.getJSON("rodents.geojson",function(data){
-//     L.geoJson(data, {
-//       pointToLayer: function(feature,latlng) {
-//         var marker = L.marker(latlng,{});
-//         marker.bindPopup(feature.properties.Location + '<br/>' + feature.properties.OPEN_DT);
-//         return marker;
-//       }
-//     }).addTo(map);
+    var nyczipcodefile = "../static/data311/zipcode/nyczipcodes.geojson";
     
-    // add GeoJSON layer to the map once the file is loaded
+    $.getJSON(nyczipcodefile, function(hoodData) {
+      L.geoJson( hoodData,{style: { color: "#000000", fillColor: "#f7f7f7", weight: 5 }, 
+      onEachFeature: function( feature, layer ){
+        layer.bindPopup( "<strong>" + feature.properties.postalCode + "</strong><br/>" +
+                        "<strong>" + feature.properties.PO_NAME + "</strong><br/>" +
+                        "<strong>" + feature.properties.borough + "</strong><br/>")
+      }
+      }).addTo(map);
+    });
 
-  
+    
+    var imgPath = '../static/data311/kdelayer/' +  "unnormalized" + '/' + 'Noise - Residential' + '/' + 'Noise - Residential' + '_' + '0' + '.png';
+    var imageUrl = imgPath;
+    var imageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
+      // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]]; //min and max
+    var finalimage = new L.imageOverlay(imageUrl, imageBounds);
+    map.addLayer(finalimage);
+
+    function check(complaint) {
+      if(map.hasLayer(finalimage)) {
+        map.removeLayer(finalimage);
+        console.log("HELLO WORLD");
+      }
+
+      month = document.getElementById("monthSlider").value;
+      normalized = false;
+      normalized_path = "";
+      if(normalized != false) normalized_path = "normalized";
+      else normalized_path = "unnormalized";
+
+      imgPath = '../static/data311/kdelayer/' + normalized_path + '/' + complaint + '/' + complaint + '_' + month + '.png';
+      imageUrl = imgPath;
+      ImageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
+        // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]]; //min and max
+      finalimage = new L.imageOverlay(imageUrl, imageBounds);
+      map.addLayer(finalimage);
+    
+    }
+
+  </script>
+
+
+<!-- jQuery functions go here-->
+  <script type="text/javascript">
+      $(document).ready(function() {
+          //practice
+          $('#monthSlider').slider({
+            formatter: function(value) {
+              return 'Current value: ' + value;
+            }
+          });
+
+          var monthNames = ["January", "Februrary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+          var yr = "";
+          var month = "";
+
+          var combo_yrMonth = "";
+
+          $("#monthSlider").on("slide", function(slideEvt) {
+            month = (slideEvt.value% 12) + 1;
+            yr = Math.floor(slideEvt.value/12);
+
+            // just the display
+            $("#timeValue1").text(monthNames[month-1] + " 201" + yr);
+
+            if(month < 10) {
+              month = "0" + month;
+            }
+            combo_yrMonth = "201" + yr + "-" + month + "-00" + " 00:00:00";
+
+            // post data
+            $("#from").val(combo_yrMonth);
+        });
+    });
   </script>
 
 </body>
