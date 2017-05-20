@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>311 Data Vis</title>
+  <title>311 Complaint Data Visualization</title>
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
   crossorigin=""/>
@@ -55,25 +55,25 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Complaint Type <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Residential" checked="true" > Noise - Residential</a></li>
-            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="check(this.value)" value="Street Condition"> Street Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="PLUMBING"> Plumbing</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Blocked Driveway"> Blocked Driveway</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Water System"> Water System</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Street Light Condition"> Street Light Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Noise"> Noise</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="ELECTRIC"> Electric</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Dirty Conditions"> Dirty Conditions</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Noise - Commercial"> Noise - Commercial</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Damaged Tree"> Damaged Tree</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Sanitation Condition"> Sanitation Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Traffic Signal Condition"> Traffic Signal Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="check(this.value)" value="Rodent"> Rodent</a></li>
+            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Residential" checked="true" > Noise - Residential</a></li>
+            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Condition"> Street Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="PLUMBING"> Plumbing</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Blocked Driveway"> Blocked Driveway</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Water System"> Water System</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Light Condition"> Street Light Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise"> Noise</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="ELECTRIC"> Electric</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Dirty Conditions"> Dirty Conditions</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Commercial"> Noise - Commercial</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Damaged Tree"> Damaged Tree</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Sanitation Condition"> Sanitation Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Traffic Signal Condition"> Traffic Signal Condition</a></li>
+            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Rodent"> Rodent</a></li>
           </ul>
         </li>
         <li class="dropdown">
-        <li><a href="#mapSection"> <input id="NormalizedID" type="radio" name="toggleType" value="Normalized" > Normalized</a></li>
-        <li><a href="#mapSection"> <input id="UnnormalizedID" type="radio" name="toggleType" value="UnNormalized" checked="True" > Unnormalized</a></li>
+        <li><a href="#mapSection"> <input id="NormalizedID" type="radio" name="toggleType" onclick="checkToggle(this.value)" value="Normalized" > Normalized</a></li>
+        <li><a href="#mapSection"> <input id="UnnormalizedID" type="radio" name="toggleType" onclick="checkToggle(this.value)" value="UnNormalized" checked="True" > Unnormalized</a></li>
       </ul>
 
     </div><!-- /.navbar-collapse -->
@@ -159,9 +159,9 @@
       geojsonlayer.bringToFront();
     });
 
-    $("#pointerSlide").change(function(){
-      console.log('changed');
-    })
+    // $("#pointerSlide").change(function(){
+    //   console.log('changed');
+    // })
 
 
     function onEachFeatureZipCode(feature, layer) {
@@ -273,27 +273,33 @@
       });
     }
 
+    //first initial
+    var complaint = $('input[name=complaint]:checked').val();
+    var month = document.getElementById("monthSlider").value;
+    var normalized_path = "";
+    if($('input[name=toggleType]:checked').val() == "UnNormalized") normalized_path = "unnormalized";
+      else normalized_path = "normalized";
 
-    var imgPath = '../static/data311/kdelayer/' +  "unnormalized" + '/' + 'Noise - Residential' + '/' + 'Noise - Residential' + '_' + '0' + '.png';
+    console.log(complaint);
+    console.log(month);
+    console.log(normalized_path);
+
+    var imgPath = '../static/data311/kdelayer/' +  "unnormalized" + '/' + complaint + '/' + complaint + '_' + month + '.png';
     var imageUrl = imgPath;
     var imageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
       // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]]; //min and max
     var finalimage = L.imageOverlay(imageUrl, imageBounds);
     map.addLayer(finalimage);
 
-    function check(complaint) {
+    //change imagelayer from radiobutton
+    function checkComplaint(complaint) {
       if(map.hasLayer(finalimage)) {
         map.removeLayer(finalimage);
       }
 
-      month = document.getElementById("monthSlider").value;
-      normalized = false;
-      if (document.getElementById('NormalizedID').checked){
-        normalized = true;
-      }
-      normalized_path = "";
-      if(normalized != false) normalized_path = "normalized";
-      else normalized_path = "unnormalized";
+      month = document.getElementById("monthSlider").value; 
+      if($('input[name=toggleType]:checked').val() == "UnNormalized") normalized_path = "unnormalized";
+      else normalized_path = "normalized";
 
       imgPath = '../static/data311/kdelayer/' + normalized_path + '/' + complaint + '/' + complaint + '_' + month + '.png';
       imageUrl = imgPath;
@@ -302,6 +308,79 @@
       finalimage = L.imageOverlay(imageUrl, imageBounds).addTo(map);
       finalimage.bringToBack();
     }
+
+
+    //change imagelayer from toggle
+    function checkToggle(value) {
+      if(map.hasLayer(finalimage)) {
+        map.removeLayer(finalimage);
+      }
+      
+      complaint = $('input[name=complaint]:checked').val();
+      month = document.getElementById("monthSlider").value;
+      if(value == "Normalized") normalized_path = "normalized";
+      else normalized_path = "unnormalized";
+
+      imgPath = '../static/data311/kdelayer/' + normalized_path + '/' + complaint + '/' + complaint + '_' + month + '.png';
+      imageUrl = imgPath;
+      ImageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
+        // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]]; //min and max
+      finalimage = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+      finalimage.bringToBack();      
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //change imagelyer from slider
+    var monthNames = ["January", "Februrary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var yr = "";
+    var whichmonth = "";
+    var combo_yrMonth = "";
+    $('#monthSlider').slider({
+      formatter: function(value) {
+        return 'Current value: ' + value;
+      }
+    });    
+
+    $("#monthSlider").on("slide", function(slideEvt) {
+      whichmonth = (slideEvt.value% 12) + 1;
+      yr = Math.floor(slideEvt.value/12);
+
+      // just the display
+      $("#timeValue1").text(monthNames[whichmonth-1] + " 201" + yr);
+
+      if(whichmonth < 10) {
+        whichmonth = "0" + whichmonth;
+      }
+      combo_yrMonth = "201" + yr + "-" + whichmonth + "-00" + " 00:00:00";
+
+      // post data
+      $("#from").val(combo_yrMonth);
+
+      //check if the finalimage layer is on leaflet
+      if(map.hasLayer(finalimage)) {
+        map.removeLayer(finalimage);
+      }
+
+      //grabbing the which complaint
+      complaint = $('input[name=complaint]:checked').val();
+      //grabbing which month
+      month = slideEvt.value;
+      //check if toggleType is unnormalized
+      if($('input[name=toggleType]:checked').val() == "UnNormalized") normalized_path = "unnormalized";
+      else normalized_path = "normalized";
+      //set imgpath
+      imgPath = '../static/data311/kdelayer/' + normalized_path + '/' + complaint + '/' + complaint + '_' + month + '.png';
+      imageUrl = imgPath;
+      ImageBounds = [[40.484300, -74.275076], [40.915760, -73.695027]]; //working
+        // imageBounds = [[40.495628, -74.255819], [40.913253, -73.700065]]; //min and max
+
+      finalimage = L.imageOverlay(imageUrl, imageBounds).addTo(map);
+      finalimage.bringToBack();
+    });
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
     function zoomed() {
       features.attr("transform", "translate(" + zoom.translate() + ")scale(" + zoom.scale() + ")")
@@ -592,42 +671,7 @@
         return d;
       }
     }
-
-  </script>
-
-
-<!-- jQuery functions go here-->
-  <script type="text/javascript">
-      $(document).ready(function() {
-          //practice
-          $('#monthSlider').slider({
-            formatter: function(value) {
-              return 'Current value: ' + value;
-            }
-          });
-
-          var monthNames = ["January", "Februrary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-          var yr = "";
-          var month = "";
-
-          var combo_yrMonth = "";
-
-          $("#monthSlider").on("slide", function(slideEvt) {
-            month = (slideEvt.value% 12) + 1;
-            yr = Math.floor(slideEvt.value/12);
-
-            // just the display
-            $("#timeValue1").text(monthNames[month-1] + " 201" + yr);
-
-            if(month < 10) {
-              month = "0" + month;
-            }
-            combo_yrMonth = "201" + yr + "-" + month + "-00" + " 00:00:00";
-
-            // post data
-            $("#from").val(combo_yrMonth);
-        });
-    });
+    
 
   </script>
 
