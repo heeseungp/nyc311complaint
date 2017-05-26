@@ -23,7 +23,7 @@ To run the server on local instance, run
 ```
 
 #!python
-python main.py
+python data_311.py
 
 ```
 
