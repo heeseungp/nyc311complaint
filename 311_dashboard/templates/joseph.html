@@ -5,9 +5,10 @@
   integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
   crossorigin=""/>
   <!--   <link rel="stylesheet" href="../static/css/bootstrap.min.css"> -->
-  <link rel="stylesheet" href="../static/css/style.css">
   <link rel="stylesheet" href="../static/css/slider.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../static/css/style.css">
  <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
   integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
   crossorigin=""></script>
@@ -28,7 +29,6 @@
     margin-top: 20px;
     height: 100%;
 }
-}
 #map{
     /*margin-left: -65px;*/
     width: 100%;
@@ -36,8 +36,17 @@
 }
 #monthSlider{
   width: 350%;
-  text: center;
 }
+label{
+  font-weight: normal !important;
+}
+.radioCenter{
+  margin-left: 5px;
+}
+.radioCenter:hover{
+  background-color: #e6e6e6;
+}
+
 </style>
 </head>
 
@@ -53,22 +62,71 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Complaint Type <span class="caret"></span></a>
+          <a href="#" id="dropDownTitle" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Complaint Type <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Residential" checked="true" > Noise - Residential</a></li>
-            <li><a href="#mapSection"> <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Condition"> Street Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="PLUMBING"> Plumbing</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Blocked Driveway"> Blocked Driveway</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Water System"> Water System</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Light Condition"> Street Light Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise"> Noise</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="ELECTRIC"> Electric</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Dirty Conditions"> Dirty Conditions</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Commercial"> Noise - Commercial</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Damaged Tree"> Damaged Tree</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Sanitation Condition"> Sanitation Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Traffic Signal Condition"> Traffic Signal Condition</a></li>
-            <li><a href="#mapSection"><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Rodent"> Rodent</a></li>
+
+
+            <!-- <label class="center-block"> -->
+            <label class="radioCenter">
+            <li> <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Residential" checked="true"> Noise - Residential</li>
+            </label>
+            <br>
+
+            <!-- <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Condition"> Street Condition</li>
+            </label> -->
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Condition"> Street Condition</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Plumbing"> Plumbing</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Blocked Driveway"> Blocked Driveway</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Water System"> Water System</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Light Condition"> Street Light Condition</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise"> Noise</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Electric"> Electric</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Dirty Conditions"> Dirty Conditions</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Commercial"> Noise - Commercial</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Damaged Tree"> Damaged Tree</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Sanitation Condition"> Sanitation Condition
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Traffic Signal Condition"> Traffic Signal Condition</li>
+            </label>
+            <br>
+            <label class="radioCenter">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Rodent"> Rodent</li>
+            </label>
+
           </ul>
         </li>
         <li class="dropdown">
@@ -84,7 +142,7 @@
 <section id="cover">
     <h1 class="display-3">311 Complaints Data Visualization</h1>
 </section>
-<section id="text-section1">
+<!-- <section id="text-section1">
  <div class="container">
     <div class="row">
       <div class="col-sm-8">
@@ -95,8 +153,8 @@
       </div>
     </div>
   </div>
-</section>
-<section id="text-section2">
+</section> -->
+<!-- <section id="text-section2">
  <div class="container">
     <div class="row">
       <div class="col-sm-8">
@@ -107,7 +165,7 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
 <section id="mapSection">
   <div class="container">
     <div class="row">
@@ -117,7 +175,20 @@
       <div class="col-sm-4">
       <div class="text">
         <h1>311 Dashboard</h1>
-        <p>Since the creation of New York City’s open data law (Local Law 11 of 2012), the growing amount of data that is publicly recorded has burgeoned. And while the open data movement has made the data more accessible, interpreting it has not been any easier. According to Fast.Co Design, a business media brand, as quoted from this article, “… there wasn’t a tool to generate broad, location-based insights for people at the top”. As a result, a new dashboard was created for the Mayor’s Office in January of 2017. However the dashboard is not available for public use, and it is in this context that we believe we can offer our services to bridge this gap for those interested in exploring this data.
+        <p>
+        Since the creation of New York City’s open data law (Local Law 11 of 2012), the growing amount of data that is publicly recorded has burgeoned. This
+        web based interactive visualization uses 311 Data available on NYC open data
+        to visualize the complaints </p>
+        <p>
+        To interact with the map, first pick a complaint type from the 
+        Complaint type dropdown. The data can be seen in Normalized or
+        Unnormalized form by selecting the radio buttons. Using the slider 
+        the data can be seen month by month from January 2010 to December 2016
+        </p>
+        By selecting any zip code from the map, a bar graph is shown to 
+        visualize the most common complaints in that zip code.
+        <p>
+        Map is 
       </p>
       </div>
       </div>
@@ -293,6 +364,8 @@
 
     //change imagelayer from radiobutton
     function checkComplaint(complaint) {
+      document.getElementById('dropDownTitle').innerHTML = complaint;
+      document.getElementById('dropDownTitle').style.backgroundColor = "#e6e6e6";
       if(map.hasLayer(finalimage)) {
         map.removeLayer(finalimage);
       }
@@ -378,7 +451,6 @@
       finalimage.bringToBack();
     });
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
