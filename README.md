@@ -5,6 +5,7 @@ https://www.dropbox.com/s/nqeqcv55ueq2f6h/kdelayer.zip?dl=
 
 
 After download this zip, create a folder inside /static called "data311" and put the entire unzipped "kdelayer" folder inside /static/data311/
+Place data311/zipcode inside /static
 
 
 Import your .csv 311 data file to MongoDB (for locally stored db)
