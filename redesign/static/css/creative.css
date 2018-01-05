@@ -44,6 +44,16 @@ h6 {
 .bg-dark {
   background-color: #212529 !important; }
 
+
+/* working on the border*/
+img.cleanborder {
+  margin-top: 5px;
+  border: #606060 thick solid;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
 .text-faded {
   color: rgba(255, 255, 255, 0.7); }
 
