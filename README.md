@@ -12,6 +12,15 @@ This data visualization is a dashboard allowing users to filter the 311 complain
 
 ## Instruction
 
+Download a zipfile from https://www.dropbox.com/sh/2njaqi04efwl8da/AAABlOxSY7_hQi1fKHXpsA72a?dl=0
+
+After extraction, the nyc311 file includes mapimg and gif files.
+
+Insert mapimg file inside /static/img/
+
+Insert gif file inside /static/
+
+
 Be sure to use virtualenv when working with libraries from this project. Sync your pip with
 ```
 
