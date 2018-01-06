@@ -1,6 +1,10 @@
+/311_dashboard/*
+
 /311_dashboard/static/data/*
 /311_dashboard/static/data311/*
 /311_dashboard/templates/data311/*
 /311_dashboard/311_Data.csv
 /311_dashboard/population.csv
-/redesign/static/gif/*
+
+/static/gif/*
+/static/img/mapimg/*

@@ -84,6 +84,14 @@ img::-moz-selection {
 body {
   -webkit-tap-highlight-color: #212529; }
 
+
+#map{
+    /*margin-left: -65px;*/
+    width: 850px;
+    height: 850px;
+    margin: 0 auto;
+}
+
 #mainNav {
   border-bottom: 1px solid rgba(33, 37, 41, 0.1);
   background-color: #fff;
@@ -245,3 +253,19 @@ header.masthead {
     box-shadow: 0 0 0 0.2rem rgba(240, 95, 64, 0.5) !important; }
 
 
+.radioborder {
+  margin-top: 30px;
+  margin-bottom: 30px; 
+}
+
+.dropdowncomplaint {
+  margin-bottom: 30px;
+}
+
+#sliderMiddle {
+  margin-bottom: 30px;
+}
+
+#monthSlider{
+  width: 350%;
+}

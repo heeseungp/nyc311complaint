@@ -14,12 +14,21 @@
     <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
-    <link href="stastic/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
     <!-- Plugin CSS -->
     <link href="static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+
+    <!-- Slider CSS -->
+    <link rel="stylesheet" href="static/css/slider.css">
+
 
     <!-- Custom styles for this template -->
     <link href="static/css/creative.css" rel="stylesheet">
@@ -102,9 +111,9 @@
         <div class="row no-gutters popup-gallery">
 
           <!-- BLOCKED DRIVEWAY -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/blocked_driveway/ln_blocked-driveway.gif">
-              <img class="img-fluid" src="static/gif/blocked_driveway/ln_blocked-driveway.gif" alt="gif heat map of blocked driveway">
+              <img class="img-fluid gif" src="static/gif/blocked_driveway/ln_blocked-driveway.gif" alt="gif heat map of blocked driveway">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -119,9 +128,9 @@
           </div>
 
           <!-- DAMAGED TREE -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/blocked_driveway/ln_blocked-driveway.gif">
-              <img class="img-fluid" src="static/gif/damaged_tree/ln_damaged-tree.gif" alt="gif of heatmap for damaged tree">
+              <img class="img-fluid gif" src="static/gif/damaged_tree/ln_damaged-tree.gif" alt="gif of heatmap for damaged tree">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -136,9 +145,9 @@
           </div>
 
           <!-- DIRTY CONDITIONS -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/dirty_conditions/ln_dirty-conditions.gif">
-              <img class="img-fluid" src="static/gif/dirty_conditions/ln_dirty-conditions.gif" alt="gif of heatmap for dirty conditions complaint type">
+              <img class="img-fluid gif" src="static/gif/dirty_conditions/ln_dirty-conditions.gif" alt="gif of heatmap for dirty conditions complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -153,9 +162,9 @@
           </div>
 
           <!-- ELECTRIC -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/electric/ln_electric.gif">
-              <img class="img-fluid" src="static/gif/electric/ln_electric.gif" alt="gif of heatmap for electric complaint type">
+              <img class="img-fluid gif" src="static/gif/electric/ln_electric.gif" alt="gif of heatmap for electric complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -170,9 +179,9 @@
           </div>
 
           <!-- NOISE -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/noise/ln_noise.gif">
-              <img class="img-fluid" src="static/gif/noise/ln_noise.gif" alt="gif of heatmap for noise complaint type">
+              <img class="img-fluid gif" src="static/gif/noise/ln_noise.gif" alt="gif of heatmap for noise complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -187,9 +196,9 @@
           </div>
 
           <!-- NOISE - COMMERCIAL -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/noise_commercial/ln_noise-commercial.gif">
-              <img class="img-fluid" src="static/gif/noise_commercial/ln_noise-commercial.gif" alt="gif of heatmap for noise commercial complaint type">
+              <img class="img-fluid gif" src="static/gif/noise_commercial/ln_noise-commercial.gif" alt="gif of heatmap for noise commercial complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -204,9 +213,9 @@
           </div>
 
           <!-- NOISE- RESIDENTIAL -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/noise_residential/ln_noise-residential.gif">
-              <img class="img-fluid" src="static/gif/noise_residential/ln_noise-residential.gif" alt="gif of heatmap for noise residential complaint type">
+              <img class="img-fluid gif" src="static/gif/noise_residential/ln_noise-residential.gif" alt="gif of heatmap for noise residential complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -221,9 +230,9 @@
           </div>
 
           <!-- PLUMBING -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/plumbing/ln_plumbing.gif">
-              <img class="img-fluid" src="static/gif/plumbing/ln_plumbing.gif" alt="gif of heatmap for plumbing complaint type">
+              <img class="img-fluid gif" src="static/gif/plumbing/ln_plumbing.gif" alt="gif of heatmap for plumbing complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -238,9 +247,9 @@
           </div>
 
           <!-- RODENT -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/rodent/ln_rodent.gif">
-              <img class="img-fluid" src="static/gif/rodent/ln_rodent.gif" alt="">
+              <img class="img-fluid gif" src="static/gif/rodent/ln_rodent.gif" alt="">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -255,9 +264,9 @@
           </div>
 
           <!-- SANITATION CONDITION -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/sanitation_condition/ln_sanitation-condition.gif">
-              <img class="img-fluid" src="static/gif/sanitation_condition/ln_sanitation-condition.gif" alt="gif of heatmap for sanitation condition complaint type">
+              <img class="img-fluid gif" src="static/gif/sanitation_condition/ln_sanitation-condition.gif" alt="gif of heatmap for sanitation condition complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -272,9 +281,9 @@
           </div>
 
           <!-- STREET CONDITION -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/street_condition/ln_street-condition.gif">
-              <img class="img-fluid" src="static/gif/street_condition/ln_street-condition.gif" alt="gif of heatmap for street condition complaint type">
+              <img class="img-fluid gif" src="static/gif/street_condition/ln_street-condition.gif" alt="gif of heatmap for street condition complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -289,9 +298,9 @@
           </div>
 
           <!-- STREET LIGHT CONDITION -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/street_light_condition/ln_street-light-condition.gif">
-              <img class="img-fluid" src="static/gif/street_light_condition/ln_street-light-condition.gif" alt="gif of heatmap for street light condition complaint type">
+              <img class="img-fluid gif" src="static/gif/street_light_condition/ln_street-light-condition.gif" alt="gif of heatmap for street light condition complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -306,9 +315,9 @@
           </div>
 
           <!-- TRAFFIC SIGNAL CONDITION -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/traffic_signal_condition/ln_traffic-signal-condition.gif">
-              <img class="img-fluid" src="static/gif/traffic_signal_condition/ln_traffic-signal-condition.gif" alt="gif of heatmap for traffic signal condition complaint type">
+              <img class="img-fluid gif" src="static/gif/traffic_signal_condition/ln_traffic-signal-condition.gif" alt="gif of heatmap for traffic signal condition complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -323,9 +332,9 @@
           </div>
 
           <!-- WATER SYSTEM -->
-          <div class="col-lg-6 col-sm-6">
+          <div class="col-lg-4 col-sm-6">
             <a class="portfolio-box" href="static/gif/water_system/ln_water-system.gif">
-              <img class="img-fluid" src="static/gif/water_system/ln_water-system.gif" alt="gif of heatmap for water system complaint type">
+              <img class="img-fluid gif" src="static/gif/water_system/ln_water-system.gif" alt="gif of heatmap for water system complaint type">
               <div class="portfolio-box-caption">
                 <div class="portfolio-box-caption-content">
                   <div class="project-category text-faded">
@@ -347,8 +356,62 @@
     <!-- DEMO -->
     <section class="bg-dark text-white" id="demo">
       <div class="container text-center">
-        <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
-        <a class="btn btn-light btn-xl sr-button" href="http://startbootstrap.com/template-overviews/creative/">Download Now!</a>
+        <h2 class="mb-4">Demonstration</h2>
+
+        <!-- Radio button for normalize and unnormalize -->
+        <div class="radioborder"> 
+          <a href="#mapSection"> <input id="NormalizedID" type="radio" name="toggleType" onclick="checkToggle(this.value)" value="Normalized" > Normalized</a> <br>
+          <a href="#mapSection"> <input id="UnnormalizedID" type="radio" name="toggleType" onclick="checkToggle(this.value)" value="UnNormalized" checked="True" > Unnormalized</a>
+        </div>
+
+        <!-- Dropdown of 14 different complaint types -->
+        <div class="dropdown dropdowncomplaint">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropDownTitle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            Dropdown
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Blocked Driveway"> Blocked Driveway</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Damaged Tree"> Damaged Tree</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Dirty Conditions"> Dirty Conditions</li>
+                  
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="ELECTRIC"> Electric</li>
+                  
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise"> Noise</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Commercial"> Noise - Commercial</li>
+
+            <li> <input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Noise - Residential" checked="true"> Noise - Residential</li>
+                  
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="PLUMBING"> Plumbing</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Rodent"> Rodent</li>                      
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Sanitation Condition"> Sanitation Condition</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Condition"> Street Condition</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Street Light Condition"> Street Light Condition</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Traffic Signal Condition"> Traffic Signal Condition</li>
+
+            <li><input type="radio" name="complaint" onclick="checkComplaint(this.value)" value="Water System"> Water System</li>
+          </ul>
+        </div>
+
+        <!--slider-->
+        <div id="sliderMiddle">
+          <input id="monthSlider" data-slider-id='pointerSlide' type="text" data-slider-min="0" data-slider-max="83" data-slider-step="1" data-slider-value="0" value="0"/>
+          <!-- what it says visually for humans-->
+          <div class="wrapper">
+            <span><span id="timeValue1">January 2010</span></span> <br>
+          </div>
+        </div>
+        <input id="from" type="hidden" name="from" value="2010-01-00 00:00:00">
+        
+        <div id="map"></div>
       </div>
     </section>
 
@@ -357,25 +420,25 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading">Let's Get In Touch!</h2>
+            <h2 class="section-heading">CCNY Data Visualization Project by Team 311</h2>
             <hr class="my-4">
-            <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+            <h3>Joseph Park</h3>
+            <h3>Si Mai</h3>
+            <h3>Ayaz Shah</h3>
+            <h3>Sharfaraz Hassan</h3>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-4 ml-auto text-center">
-            <i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
-            <p>123-456-6789</p>
-          </div>
-          <div class="col-lg-4 mr-auto text-center">
-            <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
-            <p>
-              <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
-            </p>
-          </div>
-        </div>
+
       </div>
     </section>
+
+
+
+    <!-- Leaflet JS -->
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+     integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+     crossorigin=""></script>
 
     <!-- Bootstrap core JavaScript -->
     <script src="static/vendor/jquery/jquery.min.js"></script>
@@ -389,12 +452,15 @@
     <!-- Custom scripts for this template -->
     <script src="static/js/creative.min.js"></script>
 
-    <script>
-      $(function() {
-        $("img").addClass("cleanborder");
-      });
+    <!-- Bootstrap Slider -->
+    <script src="static/js/bootstrap-slider.js"></script>
 
-    </script>
+    <!-- My jQuery -->
+    <script src="static/js/myjquery.js"></script>
+
+    <!-- map jQuery -->
+    <script src="static/js/mymapjquery.js"></script>
+
   </body>
 
 </html>
