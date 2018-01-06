@@ -1,4 +1,6 @@
-## 311 Data Visualization Project ##
+# 311 Data Visualization Project
+
+![GIF of the visualization project going over how the website works. First the about page, second is the summary page, third is the demo page, and last is the team member page](https://media.giphy.com/media/l0HU2Ftho1HxjDZZK/giphy.gif)
 
 Since the creation of New York City’s open data law (Local Law 11 of 2012), the growing amount of data that is publicly recorded has burgeoned. While the open data movement has made the data more accessible, interpreting it has not been any easier. 
 
